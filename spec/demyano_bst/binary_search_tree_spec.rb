@@ -138,4 +138,56 @@ module DemyanoBst
     
   end
   
+  describe BinarySearchTree, '#each' do
+
+    it "yields the values in order" do
+      node_3 = Node.new(3)
+      node_1 = Node.new(1)
+      node_2 = Node.new(2)
+      node_4 = Node.new(4)
+      node_9 = Node.new(9)
+      node_6 = Node.new(6)
+      node_7 = Node.new(7)
+
+      node_3.left_child = node_1
+      node_1.right_child = node_2
+
+      node_3.right_child = node_4
+      node_4.right_child = node_9
+      node_9.left_child = node_6
+      node_6.right_child = node_7
+
+      actual_values = []
+      bst = BinarySearchTree.new(node_3)
+      bst.each { |value| actual_values << value }
+      actual_values.should == [1, 2, 3, 4, 6, 7, 9]
+    end
+
+  end
+
+  describe BinarySearchTree, '#sort' do
+
+    it "orders the values" do
+      node_3 = Node.new(3)
+      node_1 = Node.new(1)
+      node_2 = Node.new(2)
+      node_4 = Node.new(4)
+      node_9 = Node.new(9)
+      node_6 = Node.new(6)
+      node_7 = Node.new(7)
+
+      node_3.left_child = node_1
+      node_1.right_child = node_2
+
+      node_3.right_child = node_4
+      node_4.right_child = node_9
+      node_9.left_child = node_6
+      node_6.right_child = node_7
+
+      bst = BinarySearchTree.new(node_3)
+      bst.sort.should == [1, 2, 3, 4, 6, 7, 9]
+    end
+
+  end
+
 end

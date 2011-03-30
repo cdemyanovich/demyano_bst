@@ -2,6 +2,8 @@ module DemyanoBst
   
   class BinarySearchTree
     
+    include Enumerable
+
     attr_reader :root
     
     def initialize(root = nil)
@@ -42,6 +44,13 @@ module DemyanoBst
       end
     end
     
+    def each(node = root)
+      return if node.nil?
+      each(node.left_child) { |value| yield(value) }
+      yield node.value
+      each(node.right_child) { |value| yield(value) }
+    end
+
   end
   
 end
