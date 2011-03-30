@@ -140,6 +140,13 @@ module DemyanoBst
   
   describe BinarySearchTree, '#each' do
 
+    it "yields no values when the tree is empty" do
+      bst = BinarySearchTree.new
+      actual_values = []
+      bst.each { |value| actual_values << value }
+      actual_values.should == []
+    end
+
     it "yields the values in order" do
       node_3 = Node.new(3)
       node_1 = Node.new(1)
@@ -167,7 +174,18 @@ module DemyanoBst
 
   describe BinarySearchTree, '#sort' do
 
-    it "orders the values" do
+    it "returns [] when the tree is empty" do
+      bst = BinarySearchTree.new
+      bst.sort.should == []
+    end
+
+    it "returns a list of only the root value when the tree has only a root" do
+      node_3 = Node.new(3)
+      bst = BinarySearchTree.new(node_3)
+      bst.sort.should == [3]
+    end
+
+    it "returns a list of the values in order" do
       node_3 = Node.new(3)
       node_1 = Node.new(1)
       node_2 = Node.new(2)
