@@ -51,6 +51,49 @@ module DemyanoBst
       each(node.right_child) { |value| yield(value) }
     end
 
+    def delete(value)
+      found = search(value)
+      return if found.nil?
+      if found.leaf?
+        if found.root?
+          @root = nil
+        else
+          found.parent.delete(found)
+        end
+      elsif child = found.only_child
+        child.parent = found.parent
+
+        if found.parent
+          if found.parent.left_child == found
+            found.parent.left_child = child
+          else
+            found.parent.right_child = child
+          end
+        else
+          @root = child
+        end
+      else
+        predecessor = found.predecessor
+        original_predecessor_parent = predecessor.parent
+
+        if found.left_child != predecessor
+          predecessor.left_child = found.left_child
+          predecessor.left_child.parent = predecessor
+        end
+        predecessor.right_child = found.right_child
+        predecessor.right_child.parent = predecessor
+
+        if found.parent.left_child == found
+          found.parent.left_child = predecessor
+        else
+          found.parent.right_child = predecessor
+        end
+
+        predecessor.parent = found.parent
+        original_predecessor_parent.delete(predecessor)
+      end
+    end
+
   end
-  
+
 end
