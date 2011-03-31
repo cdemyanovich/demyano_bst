@@ -78,18 +78,18 @@ module DemyanoBst
     
   end
   
-  describe Node, '#predecessor' do
+  describe Node, '#in_order_predecessor' do
     
     it "is nil if node is a leaf" do
       node_3 = Node.new(3)
-      node_3.predecessor.should be_nil
+      node_3.in_order_predecessor.should be_nil
     end
     
     it "is left child if left child is leaf" do
       node_3 = Node.new(3)
       node_1 = Node.new(1, node_3)
       node_3.left_child = node_1
-      node_3.predecessor.should == node_1
+      node_3.in_order_predecessor.should == node_1
     end
     
     it "is left child's right child if right child is present" do
@@ -98,9 +98,9 @@ module DemyanoBst
       node_2 = Node.new(2, node_1)
       node_3.left_child = node_1
       node_1.right_child = node_2
-      node_3.predecessor.should == node_2
+      node_3.in_order_predecessor.should == node_2
     end
     
   end
-  
+
 end
