@@ -85,6 +85,7 @@ module DemyanoBst
       node_3 = bst.insert(3)
       node_3.should_not be_nil
       bst.root.should == node_3
+      node_3.parent.should be_nil
     end
     
     it "creates left child node of root for value less than root" do
@@ -93,6 +94,7 @@ module DemyanoBst
       node_1 = bst.insert(1)
       node_1.should_not be_nil
       node_3.left_child.should == node_1
+      node_1.parent.should == node_3
     end
     
     it "creates right child node of root for value greater than root" do
@@ -101,6 +103,7 @@ module DemyanoBst
       node_4 = bst.insert(4)
       node_4.should_not be_nil
       node_3.right_child.should == node_4
+      node_4.parent.should == node_3
     end
     
     it "creates deep left child node" do
@@ -113,6 +116,7 @@ module DemyanoBst
       node_4 = bst.insert(4)
       node_4.should_not be_nil
       node_6.left_child.should == node_4
+      node_4.parent.should == node_6
     end
     
     it "creates deep right child node" do
@@ -125,6 +129,7 @@ module DemyanoBst
       node_7 = bst.insert(7)
       node_7.should_not be_nil
       node_6.right_child.should == node_7
+      node_7.parent.should == node_6
     end
     
     it "returns existing node if value already inserted" do

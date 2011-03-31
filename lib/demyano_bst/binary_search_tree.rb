@@ -27,14 +27,14 @@ module DemyanoBst
         return @root
       elsif value < node.value
         if node.left_child.nil?
-          node.left_child = Node.new(value)
+          node.left_child = Node.new(value, node)
           return node.left_child
         else
           return insert(value, node.left_child)
         end
       elsif value > node.value
         if node.right_child.nil?
-          node.right_child = Node.new(value)
+          node.right_child = Node.new(value, node)
           return node.right_child
         else
           return insert(value, node.right_child)
